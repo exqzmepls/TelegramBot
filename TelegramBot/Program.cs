@@ -1,8 +1,21 @@
+using Telegram.Bot;
+using TelegramBot.Services;
+
 var builder = WebApplication.CreateBuilder(args);
+
+var configuration = builder.Configuration;
+var token = configuration["Token"];
+var telegramBotClient = new TelegramBotClient(token);
+var hostingUrl = configuration["Url"];
+var webHookUrl = hostingUrl + "api/update";
+await telegramBotClient.SetWebhookAsync(webHookUrl);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+builder.Services
+    .AddScoped<ICommandsService, CommandsService>()
+    .AddSingleton<ITelegramBotClient>(telegramBotClient)
+    .AddControllers();
 
 var app = builder.Build();
 
