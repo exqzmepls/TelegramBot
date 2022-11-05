@@ -23,7 +23,7 @@ namespace TelegramBot.Commands
         public bool IsRequestedByMessage(string? text)
         {
             var trimmedText = text?.Trim();
-            var isRequested = text == "/hello";
+            var isRequested = trimmedText == "/hello";
             return isRequested;
         }
     }
