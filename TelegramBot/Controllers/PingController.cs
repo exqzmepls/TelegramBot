@@ -9,7 +9,7 @@ namespace TelegramBot.Controllers
         [HttpGet]
         public IActionResult Ping()
         {
-            return NoContent();
+            return Ok("ok");
         }
     }
 }
