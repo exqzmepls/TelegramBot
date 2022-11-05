@@ -17,9 +17,9 @@ namespace TelegramBot.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Update([FromBody] string update)
+        public IActionResult Update([FromBody] string update)
         {
-            await TextFile.AppendAllTextAsync("log", update);
+            //await TextFile.AppendAllTextAsync("log", update);
 
             /*var message = update?.Message;
 
