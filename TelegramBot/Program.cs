@@ -1,3 +1,4 @@
+using Newtonsoft.Json.Serialization;
 using Telegram.Bot;
 using TelegramBot.Services;
 
@@ -15,7 +16,12 @@ await telegramBotClient.SetWebhookAsync(webHookUrl);
 builder.Services
     .AddScoped<ICommandsService, CommandsService>()
     .AddSingleton<ITelegramBotClient>(telegramBotClient)
-    .AddControllers();
+    .AddControllers()
+    .AddNewtonsoftJson(options =>
+    {
+        options.SerializerSettings.Formatting = Newtonsoft.Json.Formatting.Indented;
+        options.SerializerSettings.ContractResolver = new DefaultContractResolver();
+    });
 
 var app = builder.Build();
 
