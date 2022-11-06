@@ -1,4 +1,5 @@
-﻿using TelegramBot.Models;
+﻿using Newtonsoft.Json;
+using TelegramBot.Models;
 
 namespace TelegramBot.Services
 {
@@ -27,14 +28,13 @@ namespace TelegramBot.Services
 
             try
             {
-                var s = await client.GetStringAsync(uri);
-                Console.WriteLine(s);
-                var cityWeather = await client.GetFromJsonAsync<CityWeather>(uri);
+                var stringJson = await client.GetStringAsync(uri);
+                var cityWeather = JsonConvert.DeserializeObject<CityWeather>(stringJson);
                 return cityWeather;
             }
-            catch (Exception ex)
+            catch
             {
-                throw new Exception($"fail {uri}", ex);
+                return default;
             }
 
         }
