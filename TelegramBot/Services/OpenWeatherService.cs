@@ -27,6 +27,8 @@ namespace TelegramBot.Services
 
             try
             {
+                var s = await client.GetStringAsync(uri);
+                Console.WriteLine(s);
                 var cityWeather = await client.GetFromJsonAsync<CityWeather>(uri);
                 return cityWeather;
             }
