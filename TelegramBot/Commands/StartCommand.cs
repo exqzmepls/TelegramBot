@@ -16,7 +16,7 @@ namespace TelegramBot.Commands
         {
             var chat = requestMessage.Chat;
             var chatId = chat.Id;
-            var text = "Welcome! Use commands presented below.";
+            var text = "Welcome! Use /about command to see bot features.";
             await _telegramBotClient.SendTextMessageAsync(chatId, text);
         }
 
