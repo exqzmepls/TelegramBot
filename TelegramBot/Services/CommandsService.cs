@@ -9,14 +9,15 @@ namespace TelegramBot.Services
         private readonly ICommand _unknownCommand;
         private readonly IReadOnlyCollection<ICommand> _commands;
 
-        public CommandsService(ITelegramBotClient telegramBotClient)
+        public CommandsService(ITelegramBotClient telegramBotClient, IWeatherService weatherService)
         {
             _unknownCommand = new UnknownCommand(telegramBotClient);
 
             _commands = new ICommand[]
             {
                 new StartCommand(telegramBotClient),
-                new HelloCommand(telegramBotClient)
+                new HelloCommand(telegramBotClient),
+                new WeatherCommand(telegramBotClient, weatherService)
             };
         }
 

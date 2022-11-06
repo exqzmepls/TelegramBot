@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Telegram.Bot.Types;
 using TelegramBot.Services;
-using TextFile = System.IO.File;
 
 namespace TelegramBot.Controllers
 {
@@ -19,13 +18,13 @@ namespace TelegramBot.Controllers
         [HttpPost]
         public async Task<IActionResult> Update([FromBody] Update update)
         {
-            var message = update?.Message;
+            var message = update.Message;
 
-            if (message == null)
-                return Ok();
-
-            var command = _commandsService.GetCommand(message);
-            await command.ExecuteAsync(message);
+            if (message != null)
+            {
+                var command = _commandsService.GetCommand(message);
+                await command.ExecuteAsync(message);
+            }
 
             return Ok();
         }
