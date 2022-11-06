@@ -22,7 +22,7 @@ namespace TelegramBot.Services
             {
                 { "q", city },
                 { "units", "metric" },
-                { "appid",  apiKey}
+                { "appid",  apiKey }
              };
             var uriBuilder = new UriBuilder
             {
@@ -31,9 +31,18 @@ namespace TelegramBot.Services
                 Path = resourcePath,
                 Query = paramsCollection.ToString()
             };
+            var uri = uriBuilder.Uri;
 
-            var cityWeather = await client.GetFromJsonAsync<CityWeather>(uriBuilder.Uri);
-            return cityWeather;
+            try
+            {
+                var cityWeather = await client.GetFromJsonAsync<CityWeather>(uri);
+                return cityWeather;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"fail {uri}", ex);
+            }
+
         }
     }
 }
