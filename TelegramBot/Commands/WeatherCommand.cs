@@ -2,7 +2,6 @@
 using Telegram.Bot;
 using Telegram.Bot.Types;
 using TelegramBot.Services;
-using File = System.IO.File;
 
 namespace TelegramBot.Commands
 {
@@ -22,8 +21,7 @@ namespace TelegramBot.Commands
             var trimmedText = requestMessage.Text!.Trim();
             var regex = new Regex(@"\/weather (\p{Lu}.*)");
             var match = regex.Match(trimmedText);
-            File.AppendAllText("logs", string.Join("---", match.Groups.Values.Select(g => $"{g.Success}={g.Value}")));
-            var cityGroup = match.Groups.Values.Single();
+            var cityGroup = match.Groups.Values.Skip(1).Single();
             var city = cityGroup.Value;
 
             var weather = await _weatherService.GetWeatherAsync(city);
