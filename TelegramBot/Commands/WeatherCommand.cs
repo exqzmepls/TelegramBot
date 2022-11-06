@@ -32,7 +32,7 @@ namespace TelegramBot.Commands
                 return;
             }
 
-            var responseText = $"{city} {weather.Weather.Main} {weather.Main.Temperature}(feels like {weather.Main.FeelsLike}) with wind speed {weather.Wind.Speed} m/s";
+            var responseText = $"{city} {weather.Weather.First().Main} {weather.Main.Temperature}(feels like {weather.Main.FeelsLike}) with wind speed {weather.Wind.Speed} m/s";
             await _telegramBotClient.SendTextMessageAsync(chatId, responseText);
         }
 
