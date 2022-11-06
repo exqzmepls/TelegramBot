@@ -9,5 +9,8 @@ namespace TelegramBot.Models
 
         [JsonProperty("feels_like", Required = Required.Always)]
         public double FeelsLike { get; set; }
+
+        [JsonProperty("pressure", Required = Required.Always)]
+        public int Pressure { get; set; }
     }
 }

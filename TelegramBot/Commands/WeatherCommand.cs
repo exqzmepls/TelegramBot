@@ -32,7 +32,8 @@ namespace TelegramBot.Commands
                 return;
             }
 
-            var responseText = $"{city} {weather.Weather.First().Main} {weather.Main.Temperature}(feels like {weather.Main.FeelsLike}) with wind speed {weather.Wind.Speed} m/s";
+            var main = weather.Main;
+            var responseText = $"{city}: {weather.Weather.First().Main}. Temperature is {main.Temperature} (feels like {main.FeelsLike}). The wind speed is {weather.Wind.Speed} m/s. Atmospheric pressure is {main.Pressure} mm Hg.";
             await _telegramBotClient.SendTextMessageAsync(chatId, responseText);
         }
 
