@@ -16,6 +16,7 @@ namespace TelegramBot.Services
             _commands = new ICommand[]
             {
                 new StartCommand(telegramBotClient),
+                new AboutCommand(telegramBotClient),
                 new HelloCommand(telegramBotClient),
                 new WeatherCommand(telegramBotClient, weatherService)
             };
