@@ -5,10 +5,9 @@ using TelegramBot.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var configuration = builder.Configuration;
-var token = configuration["Token"];
+var token = GetEnvironmentVariable("TG_API_TOKEN");
 var telegramBotClient = new TelegramBotClient(token);
-var hostingUrl = configuration["Url"];
+var hostingUrl = GetEnvironmentVariable("HOST_URL");
 var webHookUrl = hostingUrl + "api/update";
 await telegramBotClient.SetWebhookAsync(webHookUrl);
 
@@ -39,3 +38,5 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+string GetEnvironmentVariable(string name) => Environment.GetEnvironmentVariable(name) ?? string.Empty;
