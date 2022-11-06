@@ -1,5 +1,4 @@
-﻿using System.Collections.Specialized;
-using TelegramBot.Models;
+﻿using TelegramBot.Models;
 
 namespace TelegramBot.Services
 {
@@ -17,19 +16,12 @@ namespace TelegramBot.Services
             var client = _httpClientFactory.CreateClient("openweathermap");
 
             var apiKey = Environment.GetEnvironmentVariable("OPEN_WEATHER_API_KEY");
-            var resourcePath = string.Join('/', "data", "2.5", "weather");
-            var paramsCollection = new NameValueCollection
-            {
-                { "q", city },
-                { "units", "metric" },
-                { "appid",  apiKey }
-             };
             var uriBuilder = new UriBuilder
             {
                 Scheme = "http",
                 Host = "api.openweathermap.org",
-                Path = resourcePath,
-                Query = paramsCollection.ToString()
+                Path = string.Join('/', "data", "2.5", "weather"),
+                Query = string.Join('&', $"q={city}", "units=metric", $"appid={apiKey}")
             };
             var uri = uriBuilder.Uri;
 
